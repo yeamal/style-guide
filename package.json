@@ -1,0 +1,32 @@
+{
+  "name": "style-guide",
+  "version": "1.0.0",
+  "description": "scheduling tool",
+  "main": "index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "jshint": "^2.9.2"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeamal/style-guide.git"
+  },
+  "keywords": [
+    "scheduler",
+    "schedule"
+  ],
+  "author": "Mallory Busch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yeamal/style-guide"
+  },
+  "homepage": "https://github.com/yeamal/style-guide"
+}
+

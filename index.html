@@ -1,12 +1,215 @@
-{% extends "_base.html" %}
-
+{% extends "_blueprint/_base.html" %}
 {% block content %}
-<div class="container">
-  <div class="jumbotron">
-    <h1>Welcome to your new project!</h1>
-    <p>Replace this message with your own content in <code>{{ PROJECT_PATH }}/index.html</code>.</p>
-    <p>Learn more on the <a href="_example.html">example page</a>.</p>
-  </div>
+
+<div class="style-guide">
+	<aside class="index" id="#top">
+	    <ul>
+	      <li><a class="index-chapter" href="#about">About</a></li>
+	      <li><a class="index-chapter" href="#logos">Logos</a></li>
+	      <li><a class="index-chapter" href="#icons">Icons</a></li>
+	      <li><a class="index-chapter" href="#colors">Colors</a></li>
+	      <li><a class="index-chapter" href="#typography">Typography</a></li>
+	      <li><a class="index-chapter" href="#buttons">Buttons</a></li>
+	    </ul>   
+	  </aside>
+	<div class="section" id="about">
+		<h1 class="section-hed">ThinkCERCA Style Guide</h1>
+		{{ style_guide_explained|markdown }}
+	</div>
+	<div class="section" id="logos">
+		<h2 class="section-hed">Logos</h2>
+		{{ logos_explained|markdown }}
+		<div class="section-row">
+			{% for item in style if item.section == 'logos' %}
+			<div class="section-row-box {{ item.section }}">
+				<div class="section-row-box-swatch">
+					<img src="img/{{ item.example_code }}">
+				</div>
+				<!-- {{ item.use_case|markdown }} -->
+				<br>
+				<p>Download as:
+				<a href="img/{{ item.value }}.svg" download="{{ item.value }}.svg" class="download-button">SVG</a>
+				<a href="img/{{ item.value }}.png" download="{{ item.value }}.svg" class="download-button">PNG</a>
+				<a href="img/{{ item.value }}.jpg" download="{{ item.value }}.svg" class="download-button">JPG</a></p>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="section" id="icons">
+		<h2 class="section-hed">Icons</h2>
+		<h3>Material Design Icons</h3>
+		{{ icons_explained|markdown }}
+		<div class="section-row section-row-icons">
+			{% for item in style if item.section == 'icons' %}
+			<div class="section-row-box {{ item.section }}">
+				<div class="section-row-box-swatch">
+					<img src="img/{{ item.value }}.svg">
+				</div>
+				<div class="section-row-box-text">
+					<h4>{{ item.denotes }}</h4>
+					<div class="code-block-single-line">{{ item.example_code }}</div>
+					<p class="section-row-box-text-download"><a href="img/{{ item.value }}.svg" download="{{ item.value }}.svg" class="download-button">Download as SVG</a></p>
+					<p class="section-row-box-text-download"><a href="{{ item.use_case }}" target="_blank">View on Google</a></p>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="section" id="colors">
+		<h2 class="section-hed">Colors</h2>
+		<h3 class="section-subhed">CERCA Colors</h3>
+		{{ cerca_explained|markdown }}
+		<div class="section-row">
+			{% for item in style if item.type == 'cerca-color' %}
+			<div class="section-row-box cerca-brand">
+				<div class="section-row-box-swatch" style="background-color:{{ item.value }};">
+					{{ item.value }}
+				</div>
+				<div class="section-row-box-text">
+					<p>{{ item.denotes }}</p>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<h3 class="section-subhed">Lesson Colors</h3>
+		{{ lesson_explained|markdown }}
+		<div class="section-row">
+			{% for item in style if item.type == 'lesson-color' %}
+			<div class="section-row-box cerca-brand">
+				<div class="section-row-box-swatch" style="background-color:{{ item.value }};">
+				{{ item.value }}
+				</div>
+				<div class="section-row-box-text">
+					<p>{{ item.denotes }}</p>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<h3 class="section-subhed">Full Color Palette</h3>
+		{{ full_color_palette_explained|markdown }}
+		<div class="section-row">
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'red' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'orange' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'yellow' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'light-green' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'green' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'teal' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'blue' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'dark-blue' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'purple' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'pink' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'gray' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }}; {% if item.denotes == 'button-hover-gray' %}color:#2d3338;{% endif %}">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+			<div class="section-row-box one-color">
+				{% for item in style if item.type == 'skin-tone' %}
+					<div class="section-row-box-swatch {{ item.type }} {{ item.denotes }}" style="background-color:{{ item.value }};">
+					{{ item.value }}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<div class="section" id="typography">
+		<h2 class="section-hed">Typography</h2>
+		{{ typography_explained|markdown }}
+		<div class="code-block-multiple-lines">{{ typography_code_roboto }}</div>
+		<span class="code-block-single-line">{{ typography_code }}</span>
+		<div class="section-row">
+		{% for item in style if item.section == 'typography' %}
+			<div class="section-row-full">
+			<strong>{{ item.denotes|markdown }}</strong>
+			<{{ item.denotes }} class="{{ item.type }}">{{ item.value }}</{{ item.denotes }}>
+			<span class="code-block-single-line">{{ item.example_code }}</span>
+			<br>
+			<br>
+			<p>{{ item.use_case|process_text }}</p>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+	<div class="section" id="buttons">
+		<h2 class="section-hed">Buttons</h2>
+		{{ buttons_explained|markdown }}
+		<div class="section-row">
+			{% for item in style if item.section == 'buttons' %}
+			<div class="section-row-box {{ item.section }}">
+				<div class="section-row-box-swatch">
+					<button class="section-row-box-button {{ item.value }}">
+						{{ item.type }}
+					</button>
+				</div>
+				{{ item.use_case|markdown }}
+				<div class="code-block-multiple-lines">{{ item.example_code|process_text }}</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
 </div>
+
 {% endblock content %}
 
